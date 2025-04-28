@@ -20,9 +20,23 @@ namespace CRUD_test_project_with_an_API.Models
         public string Note { get; set; }
         public byte IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
+        public List<Address> Addresses { get; set; }
         public User()
         {
-
+            Addresses = new List<Address>();
+        }
+        public User(int id, string name, string notUsername, string email, string phone, string website, string note, byte isActive, DateTime createdAt, List<Address> addresses)
+        {
+            Id = id;
+            Name = name;
+            NotUsername = notUsername;
+            Email = email;
+            Phone = phone;
+            Website = website;
+            Note = note;
+            IsActive = isActive;
+            CreatedAt = createdAt;
+            Addresses = addresses;
         }
     }
 }
