@@ -20,4 +20,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
             .WithMany(x => x.Addresses)
             .HasForeignKey(x => x.UserId);
     }
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<User> Users { get; set; }
 }
