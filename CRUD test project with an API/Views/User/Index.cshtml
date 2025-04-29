@@ -1,13 +1,44 @@
 ﻿@model UserViewModel
 @{
-	foreach(var user in Model.Users)
-	{
-		<h2>@user.Id</h2>
-	}
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Website</th>
+				<th>Street</th>
+				<th>Suite</th>
+				<th>City</th>
+				<th>Zipcode</th>
+				<th>Lat</th>
+				<th>Lng</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in Model.Users)
+			{
+				<tr>
+					<td>@user.Name</td>
+					<td>@user.NotUsername</td>
+					<td>@user.Email</td>
+					<td>@user.Phone</td>
+					<td>@user.Website</td>
+					<td>@user.Address.Street</td>
+					<td>@user.Address.Suite</td>
+					<td>@user.Address.City</td>
+					<td>@user.Address.ZipCode</td>
+					<td>@user.Address.Lat</td>
+					<td>@user.Address.Lng</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 }
 <form>
-	<input name="Note" type="text"/>
-	<input name="IsActive" type="number"/>
+	<input name="Note" type="text" />
+	<input name="IsActive" type="number" />
 </form>
 <form asp-action="GetUsersFromAPI" asp-controller="User">
 	<button type="submit">Load Data</button>

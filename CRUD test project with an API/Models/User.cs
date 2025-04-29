@@ -20,12 +20,12 @@ namespace CRUD_test_project_with_an_API.Models
         public string Note { get; set; }
         public byte IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<Address> Addresses { get; set; }
+        public Address Address { get; set; }
         public User()
         {
-            Addresses = new List<Address>();
+            Address = new Address();
         }
-        public User(int id, string name, string notUsername, string email, string phone, string website, string note, byte isActive, DateTime createdAt, List<Address> addresses)
+        public User(int id, string name, string notUsername, string email, string phone, string website, string note, byte isActive, DateTime createdAt, Address address)
         {
             Id = id;
             Name = name;
@@ -36,7 +36,7 @@ namespace CRUD_test_project_with_an_API.Models
             Note = note;
             IsActive = isActive;
             CreatedAt = createdAt;
-            Addresses = addresses;
+            Address = address;
         }
     }
 }
