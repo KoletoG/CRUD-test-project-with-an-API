@@ -1,19 +1,34 @@
 ﻿using CRUD_test_project_with_an_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace CRUD_test_project_with_an_API.Controllers
 {
     public class UserController : Controller
     {
+        private static readonly HttpClient client = new HttpClient();
         private readonly ILogger<UserController> _logger;
         public UserController(ILogger<UserController> logger)
         {
             _logger= logger;
         }
+        public async Task<IActionResult> GetUsersFromAPI()
+        {
+            string api = "https://jsonplaceholder.typicode.com/users";
+            HttpResponseMessage response = await client.GetAsync(api);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                var usersAPI = JsonConvert.DeserializeObject<List<User>>(json);
+                return View("Index",new UserViewModel(usersAPI));
+            }
+
+            return View("Error");
+        }
         public IActionResult Index()
         {
-            return View();
+            return View(new UserViewModel());
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

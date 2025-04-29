@@ -1,7 +1,15 @@
-﻿
+﻿@model UserViewModel
+@{
+	foreach(var user in Model.Users)
+	{
+		<h2>@user.Id</h2>
+	}
+}
 <form>
 	<input name="Note" type="text"/>
 	<input name="IsActive" type="number"/>
 </form>
-<button>Load Data</button>
+<form asp-action="GetUsersFromAPI" asp-controller="User">
+	<button type="submit">Load Data</button>
+</form>
 <button>Save All</button>
