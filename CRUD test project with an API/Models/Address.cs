@@ -8,17 +8,22 @@ namespace CRUD_test_project_with_an_API.Models
     public class Address
     {
         [Key]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
         [MaxLength(100)]
+        [JsonPropertyName("street")]
         public string Street { get; set; }
         [MaxLength(100)]
+        [JsonPropertyName("suite")]
         public string Suite { get; set; }
         [MaxLength(100)]
+        [JsonPropertyName("city")]
         public string City { get; set; }
         [MaxLength(10)]
+        [JsonPropertyName("zipcode")]
         public string ZipCode {  get; set; }
         [NotMapped]
-        [JsonProperty("geo")]
+        [JsonPropertyName("geo")]
         public Geo Geo { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
@@ -30,8 +35,8 @@ namespace CRUD_test_project_with_an_API.Models
         }
         public void SetLatLng()
         {
-            Lat = Geo.Lat;
-            Lng= Geo.Lng;
+            Lat = double.Parse(Geo.Lat);
+            Lng= double.Parse(Geo.Lng);
         }
         public Address(int id, string street, string suite, string city, string zipCode, int userId, User user)
         {
@@ -46,9 +51,9 @@ namespace CRUD_test_project_with_an_API.Models
     }
     public class Geo
     {
-        [JsonProperty("lat")]
-        public double Lat { get; set; }
-        [JsonProperty("lng")]
-        public double Lng { get; set; }
+        [JsonPropertyName("lat")]
+        public string Lat { get; set; }
+        [JsonPropertyName("lng")]
+        public string Lng { get; set; }
     }
 }
