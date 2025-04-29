@@ -26,7 +26,7 @@ namespace CRUD_test_project_with_an_API.Models
         [JsonPropertyName("website")]
         public string Website { get; set; }
         public string Note { get; set; }
-        public byte IsActive { get; set; }
+        public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         [JsonPropertyName("address")]
         public Address Address { get; set; }
@@ -34,7 +34,7 @@ namespace CRUD_test_project_with_an_API.Models
         {
             Address = new Address();
         }
-        public User(int id, string name, string notUsername, string email, string phone, string website, string note, byte isActive, DateTime createdAt, Address address)
+        public User(int id, string name, string notUsername, string email, string phone, string website, string note, bool isActive, DateTime createdAt, Address address)
         {
             Id = id;
             Name = name;

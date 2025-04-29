@@ -14,33 +14,36 @@
 				<th>Zipcode</th>
 				<th>Lat</th>
 				<th>Lng</th>
+				<th>Note</th>
+				<th>IsActive</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var user in Model.Users)
-			{
+			<form asp-controller="User" asp-action="SaveUser" method="post">
+				@for (int i =0;i< Model.Users.Count;i++)
+				{
 				<tr>
-					<td>@user.Name</td>
-					<td>@user.NotUsername</td>
-					<td>@user.Email</td>
-					<td>@user.Phone</td>
-					<td>@user.Website</td>
-					<td>@user.Address.Street</td>
-					<td>@user.Address.Suite</td>
-					<td>@user.Address.City</td>
-					<td>@user.Address.ZipCode</td>
-					<td>@user.Address.Lat</td>
-					<td>@user.Address.Lng</td>
+					<td><input name="Users[@i].Name" type="text" value="@Model.Users[i].Name" disabled /></td>
+					<td><input name="Users[@i].NotUsername" type="text" value="@Model.Users[i].NotUsername" disabled /></td>
+					<td><input name="Users[@i].Email" type="text" value="@Model.Users[i].Email" disabled /></td>
+					<td><input name="Users[@i].Phone" type="text" value="@Model.Users[i].Phone" disabled /></td>
+					<td><input name="Users[@i].Website" type="text" value="@Model.Users[i].Website" disabled /></td>
+					<td><input name="Users[@i].Address.Street" type="text" value="@Model.Users[i].Address.Street" disabled /></td>
+					<td><input name="Users[@i].Address.Suite" type="text" value="@Model.Users[i].Address.Suite" disabled /></td>
+					<td><input name="Users[@i].Address.City" type="text" value="@Model.Users[i].Address.City" disabled /></td>
+					<td><input name="Users[@i].Address.ZipCode" type="text" value="@Model.Users[i].Address.ZipCode" disabled /></td>
+					<td><input name="Users[@i].Address.Lat" type="text" value="@Model.Users[i].Address.Lat" disabled /></td>
+					<td><input name="Users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" disabled /></td>
+					<td><input name="Users[@i].Note" type="text" value="@Model.Users[i].Note" /></td>
+					<td><input name="Users[@i].IsActive" type="checkbox" value="@Model.Users[i].IsActive" /></td>
+					<input name="Users[@i].Id" type="hidden" value="@Model.Users[i].Id" />
 				</tr>
-			}
+				}
+				<button type="submit">Save All</button>
+			</form>
 		</tbody>
 	</table>
 }
-<form>
-	<input name="Note" type="text" />
-	<input name="IsActive" type="number" />
-</form>
 <form asp-action="GetUsersFromAPI" asp-controller="User">
 	<button type="submit">Load Data</button>
 </form>
-<button>Save All</button>

@@ -31,6 +31,11 @@ namespace CRUD_test_project_with_an_API.Controllers
 
             return View("Error");
         }
+        [HttpPost]
+        public async Task<IActionResult> SaveUser(List<User> listUsers)
+        {
+            return View("Index");
+        }
         public IActionResult Index()
         {
             return View(new UserViewModel());
