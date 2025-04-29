@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace CRUD_test_project_with_an_API.Controllers
 {
@@ -20,7 +21,11 @@ namespace CRUD_test_project_with_an_API.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                var usersAPI = JsonConvert.DeserializeObject<List<User>>(json);
+                var usersAPI = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(json);
+                foreach(var user in usersAPI)
+                {
+                    user.Address.SetLatLng();
+                }
                 return View("Index",new UserViewModel(usersAPI));
             }
 

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace CRUD_test_project_with_an_API.Models
 {
@@ -9,6 +11,7 @@ namespace CRUD_test_project_with_an_API.Models
         [MaxLength(100)]
         public string Name { get; set; }
         [MaxLength(100)]
+        [JsonProperty("username")]
         public string NotUsername { get; set; }
         [MaxLength(200)]
         [EmailAddress]
