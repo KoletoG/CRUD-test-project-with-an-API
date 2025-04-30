@@ -41,7 +41,7 @@ namespace CRUD_test_project_with_an_API.Controllers
             List<Address> addresses = new List<Address>();
             foreach(var user in users)
             {
-                if (user.Note == null)
+                if (string.IsNullOrEmpty(user.Note))
                 {
                     user.Note = "";
                 }
