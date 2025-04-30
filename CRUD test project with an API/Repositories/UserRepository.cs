@@ -5,7 +5,7 @@ using System.Data;
 
 namespace CRUD_test_project_with_an_API.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly string _connectionString;
 
