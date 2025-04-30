@@ -19,15 +19,17 @@ namespace CRUD_test_project_with_an_API.Repositories
         public async Task AddUsers(List<User> users)
         {
             string sql = @"
-                        INSERT INTO Users (
-                        Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt
+                        SET IDENTITY_INSERT Users ON;
+                        INSERT INTO Users (Id, Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt
                         ) VALUES (
-                        @Name, @NotUsername, @Email, @Phone, @Website, @Note, @IsActive, @CreatedAt
-                        )";
+                        @Id, @Name, @NotUsername, @Email, @Phone, @Website, @Note, @IsActive, @CreatedAt
+                        );
+                        SET IDENTITY_INSERT Users OFF;";
             using (var conn = Connection)
             {
                 var userParams = users.Select(u => new
                 {
+                    u.Id,
                     u.Name,
                     u.NotUsername,
                     u.Email,
