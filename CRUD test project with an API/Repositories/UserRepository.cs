@@ -20,17 +20,14 @@ namespace CRUD_test_project_with_an_API.Repositories
         {
             string sql = @"
                         INSERT INTO Users (
-                        Id, Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt,
-                        Address_Street, Address_Suite, Address_City, Address_ZipCode, Address_Lat, Address_Lng
+                        Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt
                         ) VALUES (
-                        @Id, @Name, @NotUsername, @Email, @Phone, @Website, @Note, @IsActive, @CreatedAt,
-                        @Street, @Suite, @City, @ZipCode, @Lat, @Lng
+                        @Name, @NotUsername, @Email, @Phone, @Website, @Note, @IsActive, @CreatedAt
                         )";
             using (var conn = Connection)
             {
                 var userParams = users.Select(u => new
                 {
-                    u.Id,
                     u.Name,
                     u.NotUsername,
                     u.Email,
@@ -38,13 +35,7 @@ namespace CRUD_test_project_with_an_API.Repositories
                     u.Website,
                     u.Note,
                     u.IsActive,
-                    u.CreatedAt,
-                    Street = u.Address.Street,
-                    Suite = u.Address.Suite,
-                    City = u.Address.City,
-                    ZipCode = u.Address.ZipCode,
-                    Lat = u.Address.Lat,
-                    Lng = u.Address.Lng
+                    u.CreatedAt
                 });
                 await conn.ExecuteAsync(sql, userParams);
             }

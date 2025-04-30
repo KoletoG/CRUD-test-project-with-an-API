@@ -38,6 +38,13 @@ namespace CRUD_test_project_with_an_API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
+            foreach(var user in users)
+            {
+                if (user.Note == null)
+                {
+                    user.Note = "";
+                }
+            }
             await _userRepository.AddUsers(users);
             return RedirectToAction("Index");
         }
