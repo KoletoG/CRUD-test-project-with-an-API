@@ -47,7 +47,7 @@
 					<td>@Model.Users[i].Address.Lng</td>
 					<input name="users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" hidden />
 					<td><input name="users[@i].Note" type="text" value="@Model.Users[i].Note" /></td>
-					<td><input name="users[@i].IsActive" type="checkbox" value="@Model.Users[i].IsActive" /></td>
+					<td><input name="users[@i].IsActive" type="checkbox" value="true" @(Model.Users[i].IsActive ? "checked" : "") /></td>
 					<input name="users[@i].Id" type="hidden" value="@Model.Users[i].Id" />
 				</tr>
 				}
