@@ -40,23 +40,31 @@ namespace CRUD_test_project_with_an_API.Controllers
         {
             List<Address> addresses = new List<Address>();
             List<User> newUsers = new List<User>();
+            List<User> usersToUpdate = new List<User>();
             foreach(var user in users)
             {
                 if (string.IsNullOrEmpty(user.Note))
                 {
                     user.Note = "";
                 }
-                if (await _userRepository.FetchUser(user.Id)== default)
+                var resultFromFetch = await _userRepository.FetchUser(user.Id);
+                if (resultFromFetch == default)
                 {
                     newUsers.Add(user);
                     user.Address.UserId = user.Id;
                     addresses.Add(user.Address);
-                    users.Remove(user);
+                }
+                else
+                {
+                    if (resultFromFetch.Note != user.Note || resultFromFetch.IsActive!=user.IsActive)
+                    {
+                        usersToUpdate.Add(user);
+                    }
                 }
             }
             if (users.Any())
             {
-                await _userRepository.UpdateUsers(users);
+                await _userRepository.UpdateUsers(usersToUpdate);
             }
             if(newUsers.Any())
             {
