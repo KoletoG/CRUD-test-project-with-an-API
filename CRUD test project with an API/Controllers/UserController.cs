@@ -54,15 +54,15 @@ namespace CRUD_test_project_with_an_API.Controllers
                     users.Remove(user);
                 }
             }
-            if (!users.Any())
+            if (users.Any())
             {
                 await _userRepository.UpdateUsers(users);
             }
-            if(!newUsers.Any())
+            if(newUsers.Any())
             {
                 await _userRepository.AddUsers(newUsers);
             }
-            if (!addresses.Any())
+            if (addresses.Any())
             {
                 await _userRepository.AddAddress(addresses);
             }
