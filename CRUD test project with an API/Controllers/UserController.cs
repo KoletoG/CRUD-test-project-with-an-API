@@ -1,4 +1,5 @@
 ﻿using CRUD_test_project_with_an_API.Models;
+using CRUD_test_project_with_an_API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -10,9 +11,11 @@ namespace CRUD_test_project_with_an_API.Controllers
     {
         private static readonly HttpClient client = new HttpClient();
         private readonly ILogger<UserController> _logger;
-        public UserController(ILogger<UserController> logger)
+        private readonly IUserRepository _userRepository;
+        public UserController(ILogger<UserController> logger, IUserRepository userRepository)
         {
             _logger= logger;
+            _userRepository= userRepository;
         }
         public async Task<IActionResult> GetUsersFromAPI()
         {
@@ -35,7 +38,7 @@ namespace CRUD_test_project_with_an_API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
-
+            await _userRepository.AddUsers(users);
             return RedirectToAction("Index");
         }
         public IActionResult Index()
