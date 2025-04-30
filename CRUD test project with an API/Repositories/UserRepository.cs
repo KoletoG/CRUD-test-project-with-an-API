@@ -76,5 +76,11 @@ namespace CRUD_test_project_with_an_API.Repositories
             });
             await Connection.ExecuteAsync(sql, addressParams);
         }
+        public async Task<List<User>> FetchUsers()
+        {
+            string sql = @"SELECT * FROM Users";
+            var result = await Connection.QueryAsync<User>(sql);
+            return result.ToList();
+        }
     }
 }
