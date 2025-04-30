@@ -18,6 +18,15 @@ namespace CRUD_test_project_with_an_API.Repositories
 
         public async Task AddUsers(List<User> users)
         {
+            string checkSql = "SELECT COUNT(1) FROM Users WHERE Id = @Id";
+
+            bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = users[0].Id }) > 0;
+
+            if (exists)
+            {
+                string delsql = "DELETE FROM Users";
+                Connection.Execute(delsql);
+            }
             string sql = @"
                         SET IDENTITY_INSERT Users ON;
                         INSERT INTO Users (Id, Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt
