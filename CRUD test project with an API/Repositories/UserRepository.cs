@@ -34,22 +34,47 @@ namespace CRUD_test_project_with_an_API.Repositories
                         @Id, @Name, @NotUsername, @Email, @Phone, @Website, @Note, @IsActive, @CreatedAt
                         );
                         SET IDENTITY_INSERT Users OFF;";
-            using (var conn = Connection)
+            var userParams = users.Select(u => new
             {
-                var userParams = users.Select(u => new
-                {
-                    u.Id,
-                    u.Name,
-                    u.NotUsername,
-                    u.Email,
-                    u.Phone,
-                    u.Website,
-                    u.Note,
-                    u.IsActive,
-                    u.CreatedAt
-                });
-                await conn.ExecuteAsync(sql, userParams);
+                u.Id,
+                u.Name,
+                u.NotUsername,
+                u.Email,
+                u.Phone,
+                u.Website,
+                u.Note,
+                u.IsActive,
+                u.CreatedAt
+            });
+            await Connection.ExecuteAsync(sql, userParams);
+        }
+
+        public async Task AddAddress(List<Address> addresses)
+        {
+            string checkSql = "SELECT COUNT(1) FROM Addresses WHERE Id = @Id";
+
+            bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = addresses[0].Id }) > 0;
+            if (exists)
+            {
+                string delsql = "DELETE FROM Addresses";
+                Connection.Execute(delsql);
             }
+            string sql = @"
+                        INSERT INTO Addresses (Street, Suite, City, ZipCode, Lat, Lng, UserId
+                        ) VALUES (
+                         @Street, @Suite, @City, @ZipCode, @Lat, @Lng, @UserId
+                        );";
+            var addressParams = addresses.Select(a => new
+            {
+                a.Street,
+                a.Suite,
+                a.City,
+                a.ZipCode,
+                a.Lat,
+                a.Lng,
+                a.UserId
+            });
+            await Connection.ExecuteAsync(sql, addressParams);
         }
     }
 }
