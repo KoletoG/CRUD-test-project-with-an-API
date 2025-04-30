@@ -83,10 +83,12 @@ namespace CRUD_test_project_with_an_API.Controllers
             }*/
             await _userRepository.AddUsers(users);
             await _userRepository.AddAddress(addresses);
-            return RedirectToAction("Index");
+            TempData["Message"] = "Users save successfully!";
+            return View("Index",new UserViewModel());
         }
         public IActionResult Index()
         {
+            TempData["Message"] = "";
             return View(new UserViewModel());
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
