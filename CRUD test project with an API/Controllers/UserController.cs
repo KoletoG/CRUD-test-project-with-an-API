@@ -35,6 +35,7 @@ namespace CRUD_test_project_with_an_API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
+
             return RedirectToAction("Index");
         }
         public IActionResult Index()
