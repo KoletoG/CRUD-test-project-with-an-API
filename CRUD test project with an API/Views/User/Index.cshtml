@@ -21,19 +21,30 @@
 		<tbody>
 			<form asp-controller="User" asp-action="SaveUser" method="post">
 				@for (int i =0;i< Model.Users.Count;i++)
-				{
+				{ // Make a separate input field which is invisible with the data 
 				<tr>
-					<td><input name="Users[@i].Name" type="text" value="@Model.Users[i].Name" disabled /></td>
-					<td><input name="Users[@i].NotUsername" type="text" value="@Model.Users[i].NotUsername" disabled /></td>
-					<td><input name="Users[@i].Email" type="text" value="@Model.Users[i].Email" disabled /></td>
-					<td><input name="Users[@i].Phone" type="text" value="@Model.Users[i].Phone" disabled /></td>
-					<td><input name="Users[@i].Website" type="text" value="@Model.Users[i].Website" disabled /></td>
-					<td><input name="Users[@i].Address.Street" type="text" value="@Model.Users[i].Address.Street" disabled /></td>
-					<td><input name="Users[@i].Address.Suite" type="text" value="@Model.Users[i].Address.Suite" disabled /></td>
-					<td><input name="Users[@i].Address.City" type="text" value="@Model.Users[i].Address.City" disabled /></td>
-					<td><input name="Users[@i].Address.ZipCode" type="text" value="@Model.Users[i].Address.ZipCode" disabled /></td>
-					<td><input name="Users[@i].Address.Lat" type="text" value="@Model.Users[i].Address.Lat" disabled /></td>
-					<td><input name="Users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" disabled /></td>
+					<td>@Model.Users[i].Name</td>
+					<input name="Users[@i].Name" type="text" value="@Model.Users[i].Name" hidden />
+					<td>@Model.Users[i].NotUsername</td>
+					<input name="Users[@i].NotUsername" type="text" value="@Model.Users[i].NotUsername" hidden />
+					<td>@Model.Users[i].Email</td>
+					<input name="Users[@i].Email" type="text" value="@Model.Users[i].Email" hidden />
+					<td>@Model.Users[i].Phone</td>
+					<input name="Users[@i].Phone" type="text" value="@Model.Users[i].Phone" hidden />
+					<td>@Model.Users[i].Website</td>
+					<input name="Users[@i].Website" type="text" value="@Model.Users[i].Website" hidden />
+					<td>@Model.Users[i].Address.Street</td>
+					<input name="Users[@i].Address.Street" type="text" value="@Model.Users[i].Address.Street" hidden />
+					<td>@Model.Users[i].Address.Suite</td>
+					<input name="Users[@i].Address.Suite" type="text" value="@Model.Users[i].Address.Suite" hidden />
+					<td>@Model.Users[i].Address.City</td>
+					<input name="Users[@i].Address.City" type="text" value="@Model.Users[i].Address.City" hidden />
+					<td>@Model.Users[i].Address.ZipCode</td>
+					<input name="Users[@i].Address.ZipCode" type="text" value="@Model.Users[i].Address.ZipCode" hidden />
+					<td>@Model.Users[i].Address.Lat</td>
+					<input name="Users[@i].Address.Lat" type="text" value="@Model.Users[i].Address.Lat" hidden />
+					<td>@Model.Users[i].Address.Lng</td>
+					<input name="Users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" hidden />
 					<td><input name="Users[@i].Note" type="text" value="@Model.Users[i].Note" /></td>
 					<td><input name="Users[@i].IsActive" type="checkbox" value="@Model.Users[i].IsActive" /></td>
 					<input name="Users[@i].Id" type="hidden" value="@Model.Users[i].Id" />
