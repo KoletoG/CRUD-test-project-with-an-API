@@ -7,5 +7,7 @@ namespace CRUD_test_project_with_an_API.Repositories
         Task AddUsers(List<User> users); 
         Task AddAddress(List<Address> addresses);
         Task<List<User>> FetchUsers();
+        Task<User?> FetchUser(int id);
+        Task UpdateUsers(List<User> users);
     }
 }

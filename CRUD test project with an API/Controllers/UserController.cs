@@ -38,20 +38,34 @@ namespace CRUD_test_project_with_an_API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
-            var list = await _userRepository.FetchUsers();
             List<Address> addresses = new List<Address>();
+            List<User> newUsers = new List<User>();
             foreach(var user in users)
             {
                 if (string.IsNullOrEmpty(user.Note))
                 {
                     user.Note = "";
                 }
-                user.Address.UserId = user.Id;
-                addresses.Add(user.Address);
-                
+                if (await _userRepository.FetchUser(user.Id)== default)
+                {
+                    newUsers.Add(user);
+                    user.Address.UserId = user.Id;
+                    addresses.Add(user.Address);
+                    users.Remove(user);
+                }
             }
-            await _userRepository.AddUsers(users);
-            await _userRepository.AddAddress(addresses);
+            if (!users.Any())
+            {
+                await _userRepository.UpdateUsers(users);
+            }
+            if(!newUsers.Any())
+            {
+                await _userRepository.AddUsers(newUsers);
+            }
+            if (!addresses.Any())
+            {
+                await _userRepository.AddAddress(addresses);
+            }
             return RedirectToAction("Index");
         }
         public IActionResult Index()
