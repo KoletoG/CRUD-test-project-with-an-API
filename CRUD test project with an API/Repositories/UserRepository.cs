@@ -18,6 +18,13 @@ namespace CRUD_test_project_with_an_API.Repositories
 
         public async Task AddUsers(List<User> users)
         {
+            string checkSql = "SELECT COUNT(1) FROM Users WHERE Id = @Id";
+            bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = users[0].Id }) > 0;
+            if (exists)
+            {
+                string delsql = "DELETE FROM Users";
+                Connection.Execute(delsql);
+            }
             string sql = @"
                         SET IDENTITY_INSERT Users ON;
                         INSERT INTO Users (Id, Name, NotUsername, Email, Phone, Website, Note, IsActive, CreatedAt
@@ -41,6 +48,7 @@ namespace CRUD_test_project_with_an_API.Repositories
         }
         public async Task UpdateUsers(List<User> users)
         {
+            
             string sql = @"
         UPDATE Users
         SET Note = @Note,
@@ -56,6 +64,13 @@ namespace CRUD_test_project_with_an_API.Repositories
         }
         public async Task AddAddress(List<Address> addresses)
         {
+            string checkSql = "SELECT COUNT(1) FROM Addresses WHERE Id = @Id";
+            bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = addresses[0].Id }) > 0;
+            if (exists)
+            {
+                string delsql = "DELETE FROM Addresses";
+                Connection.Execute(delsql);
+            }
             string sql = @"
                         INSERT INTO Addresses (Street, Suite, City, ZipCode, Lat, Lng, UserId
                         ) VALUES (

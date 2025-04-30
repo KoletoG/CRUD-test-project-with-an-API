@@ -39,14 +39,19 @@ namespace CRUD_test_project_with_an_API.Controllers
         public async Task<IActionResult> SaveUser(List<User> users)
         {
             List<Address> addresses = new List<Address>();
+            /*
             List<User> newUsers = new List<User>();
             List<User> usersToUpdate = new List<User>();
+            */
             foreach(var user in users)
             {
                 if (string.IsNullOrEmpty(user.Note))
                 {
                     user.Note = "";
                 }
+                user.Address.UserId = user.Id;
+                addresses.Add(user.Address);
+                /*
                 var resultFromFetch = await _userRepository.FetchUser(user.Id);
                 if (resultFromFetch == default)
                 {
@@ -61,7 +66,9 @@ namespace CRUD_test_project_with_an_API.Controllers
                         usersToUpdate.Add(user);
                     }
                 }
+                */
             }
+            /*
             if (users.Any())
             {
                 await _userRepository.UpdateUsers(usersToUpdate);
@@ -73,7 +80,9 @@ namespace CRUD_test_project_with_an_API.Controllers
             if (addresses.Any())
             {
                 await _userRepository.AddAddress(addresses);
-            }
+            }*/
+            await _userRepository.AddUsers(users);
+            await _userRepository.AddAddress(addresses);
             return RedirectToAction("Index");
         }
         public IActionResult Index()
