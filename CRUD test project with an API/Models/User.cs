@@ -33,6 +33,7 @@ namespace CRUD_test_project_with_an_API.Models
         public User()
         {
             Address = new Address();
+            CreatedAt = DateTime.Now;
         }
         public User(int id, string name, string notUsername, string email, string phone, string website, string note, bool isActive, DateTime createdAt, Address address)
         {
