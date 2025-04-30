@@ -32,7 +32,7 @@ namespace CRUD_test_project_with_an_API.Controllers
             return View("Error");
         }
         [HttpPost]
-        // Use formcollection for only isactive and note, load users again from API?
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> listUsers)
         {
             return View("Index");
