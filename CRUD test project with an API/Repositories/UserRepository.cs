@@ -109,6 +109,7 @@ namespace CRUD_test_project_with_an_API.Repositories
                     a.UserId
                 });
                 await Connection.ExecuteAsync(sql, addressParams);
+                await Connection.ExecuteAsync("DBCC CHECKIDENT ('Addresses', RESEED, 0)");
             }
             catch (Exception)
             {
