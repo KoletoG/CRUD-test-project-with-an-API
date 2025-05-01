@@ -23,6 +23,7 @@ namespace CRUD_test_project_with_an_API.Controllers
         /// </summary>
         /// <returns>Redirects to Index with the users</returns>
         /// <exception cref="HttpRequestException">If the request wasn't successful, throws an exception</exception>
+        [Route("Users")]
         public async Task<IActionResult> GetUsersFromAPI()
         {
             try {
@@ -56,7 +57,7 @@ namespace CRUD_test_project_with_an_API.Controllers
         /// </summary>
         /// <param name="users">List of users to save</param>
         /// <returns>Redirects to Index view to start over</returns>
-        [HttpPost]
+        [HttpPost("UserSave")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
