@@ -5,7 +5,7 @@
 
 При стартиране на проекта -
 Трябва да се създаде база данни с името CRUDTestDB.
-Да се напише командата Update-Database в Packagae Manager Console.
+Да се напише командата Update-Database в Package Manager Console.
 След това можете да стартирате програмата.
 
 Как работи програмата - 
