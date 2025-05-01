@@ -31,7 +31,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                     {
                         user.Address.SetLatLng();
                     }
-                    return View("Index", new UserViewModel(usersAPI));
+                    return View("Index", new UserViewModel(usersAPI,true));
                 }
                 else
                 {
@@ -44,13 +44,13 @@ namespace CRUD_test_project_with_an_API.Controllers
                 return View("Error");
             }
         }
+        // KOMENTARI I DIZAIN LEFT
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
         {
             try
             {
-
                 List<Address> addresses = new List<Address>();
                 /*
                 List<User> newUsers = new List<User>();

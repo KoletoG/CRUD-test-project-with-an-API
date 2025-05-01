@@ -1,62 +1,68 @@
 ﻿@model UserViewModel
 <div>@TempData["Message"]</div>
 @{
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Username</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Website</th>
-				<th>Street</th>
-				<th>Suite</th>
-				<th>City</th>
-				<th>Zipcode</th>
-				<th>Lat</th>
-				<th>Lng</th>
-				<th>Note</th>
-				<th>IsActive</th>
-			</tr>
-		</thead>
-		<tbody>
-		<form asp-controller="User" asp-action="SaveUser" method="post">
-		@Html.AntiForgeryToken()
-				@for (int i =0;i< Model.Users.Count;i++)
-				{
+	if (Model.IsSaveButtonShowing)
+	{
+		<table>
+			<thead>
 				<tr>
-					<td>@Model.Users[i].Name</td>
-					<input name="users[@i].Name" type="text" value="@Model.Users[i].Name" hidden />
-					<td>@Model.Users[i].NotUsername</td>
-					<input name="users[@i].NotUsername" type="text" value="@Model.Users[i].NotUsername" hidden />
-					<td>@Model.Users[i].Email</td>
-					<input name="users[@i].Email" type="text" value="@Model.Users[i].Email" hidden />
-					<td>@Model.Users[i].Phone</td>
-					<input name="users[@i].Phone" type="text" value="@Model.Users[i].Phone" hidden />
-					<td>@Model.Users[i].Website</td>
-					<input name="users[@i].Website" type="text" value="@Model.Users[i].Website" hidden />
-					<td>@Model.Users[i].Address.Street</td>
-					<input name="users[@i].Address.Street" type="text" value="@Model.Users[i].Address.Street" hidden />
-					<td>@Model.Users[i].Address.Suite</td>
-					<input name="users[@i].Address.Suite" type="text" value="@Model.Users[i].Address.Suite" hidden />
-					<td>@Model.Users[i].Address.City</td>
-					<input name="users[@i].Address.City" type="text" value="@Model.Users[i].Address.City" hidden />
-					<td>@Model.Users[i].Address.ZipCode</td>
-					<input name="users[@i].Address.ZipCode" type="text" value="@Model.Users[i].Address.ZipCode" hidden />
-					<td>@Model.Users[i].Address.Lat</td>
-					<input name="users[@i].Address.Lat" type="text" value="@Model.Users[i].Address.Lat" hidden />
-					<td>@Model.Users[i].Address.Lng</td>
-					<input name="users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" hidden />
-					<td><input name="users[@i].Note" type="text" value="@Model.Users[i].Note" /></td>
-					<td><input name="users[@i].IsActive" type="checkbox" value="true" @(Model.Users[i].IsActive ? "checked" : "") /></td>
-					<input name="users[@i].Id" type="hidden" value="@Model.Users[i].Id" />
+					<th>Name</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Website</th>
+					<th>Street</th>
+					<th>Suite</th>
+					<th>City</th>
+					<th>Zipcode</th>
+					<th>Lat</th>
+					<th>Lng</th>
+					<th>Note</th>
+					<th>IsActive</th>
 				</tr>
-				}
-			<button type="submit">Save All</button>
-			</form>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<form asp-controller="User" asp-action="SaveUser" method="post">
+					@Html.AntiForgeryToken()
+					@for (int i =0;i< Model.Users.Count;i++)
+					{
+						<tr>
+							<td>@Model.Users[i].Name</td>
+							<input name="users[@i].Name" type="text" value="@Model.Users[i].Name" hidden />
+							<td>@Model.Users[i].NotUsername</td>
+							<input name="users[@i].NotUsername" type="text" value="@Model.Users[i].NotUsername" hidden />
+							<td>@Model.Users[i].Email</td>
+							<input name="users[@i].Email" type="text" value="@Model.Users[i].Email" hidden />
+							<td>@Model.Users[i].Phone</td>
+							<input name="users[@i].Phone" type="text" value="@Model.Users[i].Phone" hidden />
+							<td>@Model.Users[i].Website</td>
+							<input name="users[@i].Website" type="text" value="@Model.Users[i].Website" hidden />
+							<td>@Model.Users[i].Address.Street</td>
+							<input name="users[@i].Address.Street" type="text" value="@Model.Users[i].Address.Street" hidden />
+							<td>@Model.Users[i].Address.Suite</td>
+							<input name="users[@i].Address.Suite" type="text" value="@Model.Users[i].Address.Suite" hidden />
+							<td>@Model.Users[i].Address.City</td>
+							<input name="users[@i].Address.City" type="text" value="@Model.Users[i].Address.City" hidden />
+							<td>@Model.Users[i].Address.ZipCode</td>
+							<input name="users[@i].Address.ZipCode" type="text" value="@Model.Users[i].Address.ZipCode" hidden />
+							<td>@Model.Users[i].Address.Lat</td>
+							<input name="users[@i].Address.Lat" type="text" value="@Model.Users[i].Address.Lat" hidden />
+							<td>@Model.Users[i].Address.Lng</td>
+							<input name="users[@i].Address.Lng" type="text" value="@Model.Users[i].Address.Lng" hidden />
+							<td><input name="users[@i].Note" type="text" value="@Model.Users[i].Note" /></td>
+							<td><input name="users[@i].IsActive" type="checkbox" value="true" @(Model.Users[i].IsActive ? "checked" : "") /></td>
+							<input name="users[@i].Id" type="hidden" value="@Model.Users[i].Id" />
+						</tr>
+					}
+					<button type="submit">Save All</button>
+				</form>
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<form asp-action="GetUsersFromAPI" asp-controller="User">
+			<button type="submit">Load Data</button>
+		</form>
+	}
 }
-<form asp-action="GetUsersFromAPI" asp-controller="User">
-	<button type="submit">Load Data</button>
-</form>
