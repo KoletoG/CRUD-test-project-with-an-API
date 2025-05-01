@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRUD_test_project_with_an_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250429165759_ObjectGeo")]
-    partial class ObjectGeo
+    [Migration("20250501062201_CreateApp")]
+    partial class CreateApp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,14 +29,16 @@ namespace CRUD_test_project_with_an_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("Relational:JsonPropertyName", "city");
 
                     b.Property<double>("Lat")
                         .HasColumnType("float");
@@ -47,12 +49,14 @@ namespace CRUD_test_project_with_an_API.Migrations
                     b.Property<string>("Street")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("Relational:JsonPropertyName", "street");
 
                     b.Property<string>("Suite")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("Relational:JsonPropertyName", "suite");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -60,7 +64,8 @@ namespace CRUD_test_project_with_an_API.Migrations
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasAnnotation("Relational:JsonPropertyName", "zipcode");
 
                     b.HasKey("Id");
 
@@ -68,13 +73,16 @@ namespace CRUD_test_project_with_an_API.Migrations
                         .IsUnique();
 
                     b.ToTable("Addresses");
+
+                    b.HasAnnotation("Relational:JsonPropertyName", "address");
                 });
 
             modelBuilder.Entity("CRUD_test_project_with_an_API.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -84,20 +92,23 @@ namespace CRUD_test_project_with_an_API.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasAnnotation("Relational:JsonPropertyName", "email");
 
-                    b.Property<byte>("IsActive")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.Property<string>("NotUsername")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("Relational:JsonPropertyName", "username");
 
                     b.Property<string>("Note")
                         .IsRequired()
@@ -106,11 +117,13 @@ namespace CRUD_test_project_with_an_API.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasAnnotation("Relational:JsonPropertyName", "phone");
 
                     b.Property<string>("Website")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "website");
 
                     b.HasKey("Id");
 
