@@ -22,6 +22,9 @@
 				</tr>
 			</thead>
 			<tbody>
+			@{
+				// Fills table with users
+			 }
 				<form asp-controller="User" asp-action="SaveUser" method="post">
 					@Html.AntiForgeryToken()
 					@for (int i =0;i< Model.Users.Count;i++)

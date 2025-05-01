@@ -3,7 +3,7 @@
     public class UserViewModel
     {
         public List<User> Users { get; init; }
-        public bool IsSaveButtonShowing { get; init; }
+        public bool IsSaveButtonShowing { get; init; } // That property is to point what button (load data or save all) should be shown
         public UserViewModel(List<User> users, bool isSaveButtonShowing = false)
         { 
             Users = users;

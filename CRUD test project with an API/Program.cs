@@ -12,7 +12,7 @@ namespace CRUD_test_project_with_an_API
             var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>(); // Registers the service as scoped because that's typical for when working with db
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             var app = builder.Build();

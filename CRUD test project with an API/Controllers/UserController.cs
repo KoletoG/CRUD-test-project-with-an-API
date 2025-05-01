@@ -18,6 +18,11 @@ namespace CRUD_test_project_with_an_API.Controllers
             _logger= logger;
             _userRepository= userRepository;
         }
+        /// <summary>
+        /// Gets data from "https://jsonplaceholder.typicode.com/users" and parses it into a list of users
+        /// </summary>
+        /// <returns>Redirects to Index with the users</returns>
+        /// <exception cref="HttpRequestException">If the request wasn't successful, throws an exception</exception>
         public async Task<IActionResult> GetUsersFromAPI()
         {
             try {
@@ -29,6 +34,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                     var usersAPI = System.Text.Json.JsonSerializer.Deserialize<List<User>>(json);
                     foreach (var user in usersAPI)
                     {
+                        // Sets Lat and Lng from the Non-mapped Geo object
                         user.Address.SetLatLng();
                     }
                     return View("Index", new UserViewModel(usersAPI,true));
@@ -45,6 +51,11 @@ namespace CRUD_test_project_with_an_API.Controllers
             }
         }
         // KOMENTARI I DIZAIN LEFT
+        /// <summary>
+        /// Saves users in the database along with the addresses
+        /// </summary>
+        /// <param name="users">List of users to save</param>
+        /// <returns>Redirects to Index view to start over</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUser(List<User> users)
@@ -55,7 +66,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                 /*
                 List<User> newUsers = new List<User>();
                 List<User> usersToUpdate = new List<User>();
-                */
+                */ // These were used for when updating only specific rows
                 foreach (var user in users)
                 {
                     if (string.IsNullOrEmpty(user.Note))
@@ -79,7 +90,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                             usersToUpdate.Add(user);
                         }
                     }
-                    */
+                    */ // These were used for when updating only specific rows
                 }
                 /*
                 if (users.Any())
@@ -93,7 +104,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                 if (addresses.Any())
                 {
                     await _userRepository.AddAddress(addresses);
-                }*/
+                }*/ // These were used for when updating only specific rows
                 await _userRepository.AddUsers(users);
                 await _userRepository.AddAddress(addresses);
                 TempData["Message"] = "Users save successfully!";

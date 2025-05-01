@@ -15,7 +15,9 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Entity<Address>().HasOne(x => x.User).WithOne(x => x.Address).HasForeignKey<Address>(x => x.UserId);
+        builder.Entity<Address>().HasOne(x => x.User)
+                                 .WithOne(x => x.Address)
+                                 .HasForeignKey<Address>(x => x.UserId); // For this project, one person can have only one address and vice versa
     }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<User> Users { get; set; }

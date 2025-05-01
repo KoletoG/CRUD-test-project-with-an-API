@@ -16,13 +16,18 @@ namespace CRUD_test_project_with_an_API.Repositories
         }
 
         private IDbConnection Connection => new SqlConnection(_connectionString);
-
+        /// <summary>
+        /// Saves users data in database but first deletes the old user data
+        /// </summary>
+        /// <param name="users">List of users</param>
+        /// <returns>Saved users data in db</returns>
+        /// <exception cref="DbCustomException">Catches an error if something went wrong with the I/O operation</exception>
         public async Task AddUsers(List<User> users)
         {
             try
             {
                 string checkSql = "SELECT COUNT(1) FROM Users WHERE Id = @Id";
-                bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = users[0].Id }) > 0;
+                bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = users[0].Id }) > 0; // If a user exists - delete all users
                 if (exists)
                 {
                     string delsql = "DELETE FROM Users";
@@ -54,6 +59,7 @@ namespace CRUD_test_project_with_an_API.Repositories
                 throw new DbCustomException();
             }
         }
+        // UpdateUsers() was used for when only needed to update specific rows not whole table but task says data should be deleted anyway
         public async Task UpdateUsers(List<User> users)
         {
 
@@ -70,12 +76,18 @@ namespace CRUD_test_project_with_an_API.Repositories
                 u.Id
             }));
         }
+        /// <summary>
+        /// Deletes previous address data from db and adds new ones
+        /// </summary>
+        /// <param name="addresses">List of the addresses</param>
+        /// <returns>Saved address data in Db</returns>
+        /// <exception cref="DbCustomException">Catches an error if something went wrong with the I/O operation</exception>
         public async Task AddAddress(List<Address> addresses)
         {
             try
             {
                 string checkSql = "SELECT COUNT(1) FROM Addresses WHERE Id = @Id";
-                bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = addresses[0].Id }) > 0;
+                bool exists = Connection.ExecuteScalar<int>(checkSql, new { Id = addresses[0].Id }) > 0; // If an address exists, delete all addresses
                 if (exists)
                 {
                     string delsql = "DELETE FROM Addresses";
@@ -103,6 +115,7 @@ namespace CRUD_test_project_with_an_API.Repositories
                 throw new DbCustomException();
             }
         }
+        // FetchUsers was used for when only needed to update specific rows not whole table but task says data should be deleted anyway
         public async Task<List<User>> FetchUsers()
         {
             string sql = @"SELECT * FROM Users";
