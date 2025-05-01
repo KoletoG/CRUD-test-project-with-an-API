@@ -51,7 +51,6 @@ namespace CRUD_test_project_with_an_API.Controllers
                 return View("Error");
             }
         }
-        // KOMENTARI I DIZAIN LEFT
         /// <summary>
         /// Saves users in the database along with the addresses
         /// </summary>
@@ -108,7 +107,7 @@ namespace CRUD_test_project_with_an_API.Controllers
                 }*/ // These were used for when updating only specific rows
                 await _userRepository.AddUsers(users);
                 await _userRepository.AddAddress(addresses);
-                TempData["Message"] = "Users save successfully!";
+                TempData["Message"] = "Users saved successfully!";
                 return View("Index", new UserViewModel());
             }
             catch (DbCustomException)
