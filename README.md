@@ -1,4 +1,5 @@
-BG
+##BG
+
 За да се стартира проекта - 
 Можете да клонирате кода от github направо в някое IDE или да го свалите в ZIP файл и оттам да си го стартирате (отваряте .sln файла).
 
@@ -15,7 +16,8 @@ BG
 * Има и опция да се запазват само данните, които са нови или са променени без да се афектират непроменените данни.
 Данните се запазват в CRUDTestDB.
 
-ENG
+##ENG
+
 How to start the project - 
 You can clone the code from the github repository in an IDE of your choice OR
 You can download the code in a ZIP file and then extract it. When extracted, just open the .sln.
